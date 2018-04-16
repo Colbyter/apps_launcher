@@ -44,7 +44,6 @@ def main(state):
 				app_name = app.split("/", 2)
 				app_name = app_name[2].replace(".app", "")
 				app_name = app_name.strip()
-				#p = Popen(['open', '-a', app])
 				print(app_name)
 				get_pid(app_name)
 				#print(pid)
