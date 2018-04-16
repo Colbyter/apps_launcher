@@ -1,4 +1,5 @@
-#import subprocess
+"""Apps_Launch Script"""
+
 from subprocess import Popen, check_output
 import click
 import signal
@@ -7,6 +8,7 @@ import time
 
 
 def get_pid(name):
+	"""Func to func the process by name and then kills it"""
 	#command = "ps -A | grep -m1 '{}' | awk '{{print $1}}'".format(name)
 	command = "ps -ef | grep '{}' | grep -v grep | awk '{{print $2}}' | xargs  kill -9".format(name)
 	print(command)
@@ -18,9 +20,8 @@ def get_pid(name):
 @click.option('-state', help="State of the app. ON or OFF")
 
 def main(state):
+	"""Main part handling the commands"""
 	apps = [ '/Applications/Microsoft Outlook.app', '/Applications/Spark.app', '/Applications/Colloquy.app']
-	#apps = [ '/Applications/Spark.app', '/Applications/Microsoft Outlook.app']
-	#command_on = ['open', '-a', a]
 	
 	if state in ("ON", "on"):
 		try:
@@ -54,8 +55,6 @@ def main(state):
 		except Exception as e:
 			click.echo("Error for OFF :{}".format(e))
 		
-
-
 
 
 if __name__ == '__main__':
