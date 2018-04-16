@@ -1,7 +1,7 @@
 # Apps_launcher
 Simple CLI tool to automatically launch/close various Apps on Mac.
 
-It made this tool to automate some daily routine at work. It just launches some of Apps I user on daily basis at work.
+I made this tool to automate some daily routine at work. It just launches some of Apps I use on daily basis at work.
 
 The script can be amended to work on *NIX platform.
 
