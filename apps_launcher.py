@@ -1,6 +1,6 @@
 """Apps_Launch Script"""
 
-from subprocess import Popen, check_output
+from subprocess import Popen, check_output, CalledProcessError
 import click
 import signal
 import os
@@ -9,11 +9,18 @@ import time
 
 def get_pid(name):
 	"""Func to func the process by name and then kills it"""
-	#command = "ps -A | grep -m1 '{}' | awk '{{print $1}}'".format(name)
-	command = "ps -ef | grep '{}' | grep -v grep | awk '{{print $2}}' | xargs  kill -9".format(name)
-	print(command)
-	#return int(check_output(command, shell=True))
-	check_output(command, shell=True)
+	try:
+		#command = "ps -A | grep -m1 '{}' | awk '{{print $1}}'".format(name)
+		command = "ps -ef | grep '{}' | grep -v grep | awk '{{print $2}}' | xargs  kill -9".format(name)
+		print(command)
+		#return int(check_output(command, shell=True))
+		check_output(command, shell=True)
+		
+	except CalledProcessError as cpe:
+		click.echo("Process failed: {}".format(cpe))
+
+	except OSError as ose:
+		click.echo("Execution failed: {}".format(ose))
 	return 'ok'
 
 @click.command()
@@ -33,8 +40,8 @@ def main(state):
 				p.wait()	
 				click.echo("{} returned: {}".format(app_name, p.returncode))
 
-		except Exception as e:
-			click.echo("Error for ON:{}".format(e))
+		except OSError as oe:
+			click.echo("Execution failed for ON:{}".format(oe))
 
 	elif state in ("OFF", "off"):
 
@@ -51,8 +58,8 @@ def main(state):
 				click.echo("{} closed".format(app_name))
                 
 
-		except Exception as e:
-			click.echo("Error for OFF :{}".format(e))
+		except OSError as oe:
+			click.echo("Execution failed for OFF:{}".format(oe))
 		
 
 
