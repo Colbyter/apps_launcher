@@ -28,7 +28,7 @@ def get_pid(name):
 
 def main(state):
 	"""Main part handling the commands"""
-	apps = [ '/Applications/Microsoft Outlook.app', '/Applications/Spark.app', '/Applications/Colloquy.app']
+	apps = [ '/Applications/Microsoft Outlook.app', '/Applications/Webex Teams.app', '/Applications/Colloquy.app']
 	
 	if state in ("ON", "on"):
 		try:
